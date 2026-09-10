@@ -17,6 +17,25 @@ license: mit
 > **Category:** Software  
 > **Theme:** Disaster Management & Space Technology  
 
+[![Live Demo](https://img.shields.io/badge/🌀%20Live%20Demo-cyclonenet--sih--2026.onrender.com-blue?style=for-the-badge)](https://cyclonenet-sih-2026.onrender.com/)
+[![Deployed on Render](https://img.shields.io/badge/Deployed%20on-Render-46E3B7?style=for-the-badge&logo=render)](https://cyclonenet-sih-2026.onrender.com/)
+[![Python](https://img.shields.io/badge/Python-3.10-3776AB?style=for-the-badge&logo=python)](https://python.org)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.104-009688?style=for-the-badge&logo=fastapi)](https://fastapi.tiangolo.com)
+[![PyTorch](https://img.shields.io/badge/PyTorch-2.x-EE4C2C?style=for-the-badge&logo=pytorch)](https://pytorch.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](LICENSE)
+
+---
+
+## 🌐 Live Deployment
+
+> **👉 [https://cyclonenet-sih-2026.onrender.com/](https://cyclonenet-sih-2026.onrender.com/)**
+
+The application is live and publicly accessible. Upload any satellite IR image to get real-time cyclone detection, intensity classification, wind speed estimation, and an interactive geospatial storm map.
+
+> ⚠️ **Note:** The free Render instance spins down after 15 minutes of inactivity. The first request after a period of inactivity may take **~30–60 seconds** to wake up. Subsequent requests are instant.
+
+---
+
 CycloneNet is an end-to-end operational decision-support system for automated **Tropical Cyclone Detection**, **Intensity Classification (IMD 7-Stage Scale)**, and **Numerical Wind Speed Estimation** from satellite Infrared (IR) imagery.
 
 ---
@@ -202,17 +221,21 @@ pip install -r requirements.txt
 
 ## 12. Run
 
-### Start the Application
-Run the Uvicorn ASGI server from the repository root:
+### 🌐 Option A — Use the Live Deployed App (Recommended)
+No installation required. Access directly in any browser:
+
+> **👉 [https://cyclonenet-sih-2026.onrender.com/](https://cyclonenet-sih-2026.onrender.com/)**
+
+### 💻 Option B — Run Locally
+
+Start the Uvicorn ASGI server from the repository root:
 
 ```bash
 python -m uvicorn backend.app:app --reload --port 8000
 ```
 
 ### Access Dashboards in Browser
-* **Alternate Light-Mode Dashboard (Hero Map + Minimized Card):**  
-  👉 **`http://localhost:8000/alt`**
-* **Original Dark-Mode Cockpit Dashboard:**  
+* **Main Dashboard:**  
   👉 **`http://localhost:8000/`**
 * **Interactive OpenAPI Docs:**  
   👉 **`http://localhost:8000/docs`**

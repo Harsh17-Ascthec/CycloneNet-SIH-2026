@@ -8,8 +8,7 @@ The demo video is **optional**, but strongly recommended if your project has a w
 
 ## Live Web Application Deployment
 
-- **Public Live URL:** `<PASTE_HUGGINGFACE_SPACES_OR_DEPLOYMENT_URL_HERE>`
-  *(e.g., `https://huggingface.co/spaces/<your-username>/cyclonenet` or direct app: `https://<your-username>-cyclonenet.hf.space`)*
+- **Public Live URL:** https://cyclonenet-sih-2026.onrender.com/
 - **Local Host:** `http://localhost:8000/`
 
 ## What the video should show
