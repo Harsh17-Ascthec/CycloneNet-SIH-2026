@@ -1,0 +1,39 @@
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# Model Weights (Allow CycloneNet weights under 50MB; ignore heavy raw dumps)
+*.bin
+*.onnx
+
+# Environment & Secrets
+.env
+.env.*
+*.pem
+*.key
+
+# IDE & Editor Settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Logs & Temp
+*.log
+scratch/
+tmp/

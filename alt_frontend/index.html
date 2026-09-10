@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CycloneNet — Tropical Cyclone Detection & Classification</title>
+    <link rel="stylesheet" href="/alt_static/style.css?v=v4_no_map_on_load">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Leaflet Interactive Maps -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+</head>
+<body>
+
+    <!-- ── Header ──────────────────────────────────────────────────────── -->
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <span class="logo-icon">🌀</span>
+                <div>
+                    <h1>CycloneNet</h1>
+                    <p class="tagline">AI-Powered Tropical Cyclone Detection & Classification</p>
+                </div>
+            </div>
+            <div class="header-badges">
+                <span class="badge badge-sih">Home</span>
+                <span class="badge badge-ps">About</span>
+                <span class="badge badge-org">Help</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- ── Main Content ────────────────────────────────────────────────── -->
+    <main>
+        <!-- ── Upload Section (Shown initially when no image is uploaded) ──── -->
+        <section class="upload-section" id="uploadArea">
+            <div class="upload-area">
+                <div class="upload-icon">🛰️</div>
+                <h2>Upload Satellite IR Image</h2>
+                <p>Drag & drop a satellite infrared image, or click to browse</p>
+                <p class="upload-hint">Supports: JPG, PNG, BMP, TIFF • Max 10 MB</p>
+                <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.bmp,.tif,.tiff" hidden>
+                <button class="upload-btn" id="browseBtn">Browse Files</button>
+            </div>
+        </section>
+
+        <!-- ── Pre-Analysis Preview Section (Shown after file selected, before analysis) ── -->
+        <section class="preview-section" id="preAnalysisSection" style="display: none;">
+            <div class="pre-preview-card">
+                <div class="preview-header">
+                    <div class="preview-title-wrap">
+                        <span class="status-pulse-dot"></span>
+                        <h3>📡 Selected Satellite IR Image</h3>
+                    </div>
+                    <button class="clear-btn" id="preClearBtn" title="Remove & Upload New">✕ Clear</button>
+                </div>
+                <img id="prePreviewImage" alt="Uploaded satellite image">
+                <button class="analyze-btn" id="analyzeBtn">
+                    <span class="btn-text">🔍 Analyze Cyclone</span>
+                    <span class="btn-loading" style="display: none;">
+                        <span class="spinner"></span> Analyzing...
+                    </span>
+                </button>
+            </div>
+        </section>
+
+        <!-- ── Hero Upper Deck: Geospatial Map with Top-Left Minimized Overlay ── -->
+        <!-- Only shown once an image is analyzed and a cyclone is detected -->
+        <section class="hero-map-section" id="heroMapSection" style="display: none;">
+            <div class="result-card map-card" id="mapCard">
+                <div class="map-header">
+                    <div class="map-title-group">
+                        <h3>📍 Geospatial Position, Wind Radii (R64 / R50 / R34) & Circulation</h3>
+                        <span class="map-subhint">Geospatial satellite tracking & meteorological circulation analysis</span>
+                    </div>
+                    <span class="map-tag" id="mapCoords">Lat: 16.5° N, Lon: 86.8° E • Bay of Bengal</span>
+                </div>
+
+                <div class="map-viewport-wrapper">
+                    <!-- The Interactive Leaflet Map -->
+                    <div id="cycloneMap"></div>
+
+                    <!-- Minimized / Floating Overlay Card over the map -->
+                    <div class="preview-overlay-card minimized" id="previewContainer">
+                        <div class="preview-header">
+                            <div class="preview-title-wrap">
+                                <span class="status-pulse-dot"></span>
+                                <h3 id="previewTitle">📡 Uploaded Image</h3>
+                            </div>
+                            <div class="preview-controls">
+                                <button class="toggle-size-btn" id="toggleSizeBtn" title="Toggle Size">
+                                    <span class="btn-min-icon" style="display: none;">➖</span>
+                                    <span class="btn-exp-icon">⛶</span>
+                                </button>
+                                <button class="clear-btn" id="clearBtn" title="Remove & Upload New">✕ Clear</button>
+                            </div>
+                        </div>
+                        <div class="preview-body" id="previewBody">
+                            <img id="previewImage" alt="Uploaded satellite image">
+                            <div class="minimized-pill-hint">Click to expand / change</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Lower Deck: Analysis Results Section -->
+        <section class="results-section" id="resultsSection" style="display: none;">
+            <!-- Row 1: Cyclone System Detected Banner (Full Width) -->
+            <div class="result-card detection-card" id="detectionCard">
+                <div class="detection-status" id="detectionStatus">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- Row 2: 2-Column Grid (Intensity Classification & Wind Speed Prediction) -->
+            <div class="results-grid">
+                <!-- Intensity Classification -->
+                <div class="result-card">
+                    <h3>🏷️ Intensity Classification</h3>
+                    <div class="class-result" id="classResult">
+                        <span class="class-name" id="className">—</span>
+                        <span class="confidence" id="confidence">—</span>
+                    </div>
+                    <div class="probability-bars" id="probabilityBars">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <!-- Wind Speed Estimation -->
+                <div class="result-card">
+                    <h3>💨 Wind Speed Estimation</h3>
+                    <div class="wind-display">
+                        <div class="wind-value">
+                            <span class="wind-number" id="windKt">—</span>
+                            <span class="wind-unit">knots</span>
+                        </div>
+                        <div class="wind-value">
+                            <span class="wind-number" id="windKmh">—</span>
+                            <span class="wind-unit">km/h</span>
+                        </div>
+                    </div>
+                    <div class="severity-badge" id="severityBadge">—</div>
+                </div>
+            </div>
+
+            <!-- Row 3: 2-Column Grid (Central Barometric Pressure & Precipitation Threat) -->
+            <div class="results-grid" style="margin-top: 1rem;">
+                <!-- Central Barometric Pressure -->
+                <div class="result-card" id="pressureCard">
+                    <h3>🌡️ Central Barometric Pressure</h3>
+                    <div class="wind-display">
+                        <div class="wind-value">
+                            <span class="wind-number" id="pressureHpa">—</span>
+                            <span class="wind-unit">hPa / mb</span>
+                        </div>
+                        <div class="wind-value">
+                            <span class="wind-number" id="windCirculation">Counter-Clockwise</span>
+                            <span class="wind-unit">Cyclonic Inflow</span>
+                        </div>
+                    </div>
+                    <div class="sub-meta" id="pressureNote">Estimated via Atkinson-Holliday Wind-Pressure Relation</div>
+                </div>
+
+                <!-- Precipitation & Flash-Flood Threat -->
+                <div class="result-card" id="rainCard">
+                    <h3>🌧️ Precipitation & Flash-Flood Threat</h3>
+                    <div class="wind-display">
+                        <div class="wind-value">
+                            <span class="wind-number" id="rainRate">—</span>
+                            <span class="wind-unit">mm / hr</span>
+                        </div>
+                        <div class="wind-value">
+                            <span class="wind-number" id="rain24h">—</span>
+                            <span class="wind-unit">mm (24h Peak)</span>
+                        </div>
+                    </div>
+                    <div class="severity-badge" id="rainBadge" style="background: #e0f2fe; color: #0284c7; border-color: #bae6fd;">—</div>
+                </div>
+            </div>
+
+            <!-- Row 4: Impact Swath & Coastal Advisory Zones (Full Width) -->
+            <div class="result-card" id="threatCard" style="margin-top: 1rem;">
+                <h3>🚨 Impact Swath & Coastal Advisory Zones</h3>
+                <div id="threatZonesList" class="threat-list">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+
+            <!-- Row 5: IMD Scale Reference Card (Full Width) -->
+            <div class="result-card scale-card" style="margin-top: 1rem;">
+                <h3>📊 IMD Intensity Scale Reference</h3>
+                <div class="scale-table">
+                    <div class="scale-row" data-threshold="28">
+                        <span class="scale-color" style="background: #4CAF50;"></span>
+                        <span class="scale-label">Depression</span>
+                        <span class="scale-wind">&lt; 28 kt</span>
+                    </div>
+                    <div class="scale-row" data-threshold="34">
+                        <span class="scale-color" style="background: #8BC34A;"></span>
+                        <span class="scale-label">Deep Depression</span>
+                        <span class="scale-wind">28–33 kt</span>
+                    </div>
+                    <div class="scale-row" data-threshold="48">
+                        <span class="scale-color" style="background: #FFC107;"></span>
+                        <span class="scale-label">Cyclonic Storm</span>
+                        <span class="scale-wind">34–47 kt</span>
+                    </div>
+                    <div class="scale-row" data-threshold="64">
+                        <span class="scale-color" style="background: #FF9800;"></span>
+                        <span class="scale-label">Severe CS</span>
+                        <span class="scale-wind">48–63 kt</span>
+                    </div>
+                    <div class="scale-row" data-threshold="90">
+                        <span class="scale-color" style="background: #FF5722;"></span>
+                        <span class="scale-label">Very Severe CS</span>
+                        <span class="scale-wind">64–89 kt</span>
+                    </div>
+                    <div class="scale-row" data-threshold="120">
+                        <span class="scale-color" style="background: #f44336;"></span>
+                        <span class="scale-label">Ext. Severe CS</span>
+                        <span class="scale-wind">90–119 kt</span>
+                    </div>
+                    <div class="scale-row" data-threshold="999">
+                        <span class="scale-color" style="background: #9C27B0;"></span>
+                        <span class="scale-label">Super CS</span>
+                        <span class="scale-wind">≥ 120 kt</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Error Display -->
+        <div class="error-message" id="errorMessage" style="display: none;">
+            <span class="error-icon">⚠️</span>
+            <span id="errorText"></span>
+        </div>
+    </main>
+
+    <!-- ── Footer ──────────────────────────────────────────────────────── -->
+    <footer>
+        <p>
+            CycloneNet • Smart India Hackathon 2026 • PS 26070
+            <br>
+            Ministry of Earth Sciences / India Meteorological Department
+            <br>
+            <span class="footer-note">Powered by dual-branch CNN + polar transform fusion | PyTorch + FastAPI</span>
+        </p>
+    </footer>
+
+    <script src="/alt_static/script.js?v=v5_stable_fix"></script>
+</body>
+</html>

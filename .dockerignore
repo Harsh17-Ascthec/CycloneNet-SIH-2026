@@ -1,0 +1,28 @@
+# Git & Virtual environments
+.git/
+.gitignore
+.venv/
+backend/venv/
+env/
+venv/
+ENV/
+
+# Python cache & build
+__pycache__/
+backend/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+
+# IDE & Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# Documentation build / temp
+docs/_build/
+*.log
