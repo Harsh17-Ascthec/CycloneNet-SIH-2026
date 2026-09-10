@@ -1,28 +1,14 @@
 # Demo Video
 
-The demo video is **optional**, but strongly recommended if your project has a working prototype.
+## 🎬 Demo Video Link
 
-## Demo video link
+https://drive.google.com/file/d/1vzFD3S5RUoqBpQUQAbVaznwWMNpAWKvM/view?usp=sharing
 
-`<PASTE_YOUTUBE_OR_GOOGLE_DRIVE_VIDEO_LINK_HERE>`
-
-## Live Web Application Deployment
+## 🌐 Live Web Application
 
 - **Public Live URL:** https://cyclonenet-sih-2026.onrender.com/
 - **Local Host:** `http://localhost:8000/`
 
-## What the video should show
+## 📊 Project Presentation
 
-1. **Brief Introduction:** Overview of the problem statement (PS 26070: Tropical Cyclone Detection & Intensity Estimation for MoES/IMD).
-2. **The Proposed Solution:** End-to-end dual-branch Polar CNN with out-of-distribution guardrails and automated meteorological parameterization.
-3. **Main Features & Workflow:**
-   - Drag & drop of satellite infrared (IR) imagery.
-   - Real-time intensity classification (Depression to Super Cyclone).
-   - Numerical wind speed estimation (knots & km/h).
-   - Atkinson-Holliday barometric central pressure calculation.
-   - Concentric wind radii swaths ($R_{34}$, $R_{50}$, $R_{64}$) displayed on an interactive Esri/Leaflet satellite map.
-   - Impact swath & coastal district advisory warning matrix.
-   - Out-of-distribution rejection of non-satellite photos or drawings.
-4. **Live Prototype Demonstration:** Actual running interface and inference speed.
-
-Keep the video concise (3-5 minutes) and ensure reviewers can open the link without requesting access permissions.
+- **PPT Link:** https://docs.google.com/presentation/d/1i50gVo9dYzq7zPK21rimqpQEe_lMQjVc/edit?usp=drive_link&ouid=103262718846867748869&rtpof=true&sd=true

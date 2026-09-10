@@ -169,17 +169,13 @@ CycloneNet/
 
 ## 8. Final Presentation
 
-Keep your final SIH presentation in the repository whenever the file size allows it (< 25 MB).
-
-See [submission/PRESENTATION.md](submission/PRESENTATION.md) for the required format and cloud backup link.
+📊 **[View Presentation on Google Slides](https://docs.google.com/presentation/d/1i50gVo9dYzq7zPK21rimqpQEe_lMQjVc/edit?usp=drive_link&ouid=103262718846867748869&rtpof=true&sd=true)**
 
 ---
 
 ## 9. Demo Video
 
-A working prototype demo video is strongly recommended.
-
-Add your YouTube or Google Drive link in [submission/DEMO.md](submission/DEMO.md).
+🎬 **[Watch Demo Video on Google Drive](https://drive.google.com/file/d/1vzFD3S5RUoqBpQUQAbVaznwWMNpAWKvM/view?usp=sharing)**
 
 ---
 
