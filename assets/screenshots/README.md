@@ -1,21 +1,17 @@
-# Project Screenshots & Assets
+# Project Screenshots
 
-Place all important project screenshots, UI flows, and evaluation diagrams in this directory.
+## 01 — Home / Upload Screen
+![CycloneNet Home Screen](01-home.png.jpeg)
+*Clean satellite IR image upload interface with drag & drop support.*
 
-## Suggested Screenshot Checklist
+---
 
-1. **`dashboard_initial.png`**: The clean home screen with the satellite IR upload area (before analysis).
-2. **`dashboard_cyclone_detected.png`**: The complete results screen showing the upper hero satellite map with the spinning cyclone marker and concentric wind radii ($R_{34}, R_{50}, R_{64}$).
-3. **`minimized_overlay.png`**: Close-up of the uploaded image minimized to the top-left of the satellite map, and its expanded toggle view.
-4. **`intensity_wind_cards.png`**: Detailed view of the Intensity Classification, Wind Speed Estimation, and Central Barometric Pressure cards.
-5. **`coastal_advisory_swath.png`**: Impact swath and coastal district warning alert badges (Red / Orange / Yellow).
-6. **`ood_rejection_error.png`**: Demonstration of the Out-of-Distribution filter safely rejecting non-satellite graphics or drawings.
+## 02 — Cyclone Detected: Geospatial Map View
+![CycloneNet Detection Result](02-result.png.jpeg)
+*Live Leaflet satellite map showing detected cyclone position (Arabian Sea), concentric wind radii (R64/R50/R34), storm popup with wind speed & pressure, and minimized uploaded image card (top-left).*
 
-## Guidelines
+---
 
-- Use clear, descriptive PNG or JPG file names.
-- Ensure screenshots are high resolution and readable in the presentation and README.
-- Embed them in your main `README.md` using standard markdown:
-  ```markdown
-  ![CycloneNet Dashboard](assets/screenshots/dashboard_cyclone_detected.png)
-  ```
+## 03 — Analysis Results Dashboard
+![CycloneNet Analysis Cards](03-feature.png.jpeg)
+*Full results panel: Intensity Classification (Moderate 48–89kt, 70.1% confidence), Wind Speed (60.5 kt / 112 km/h), Central Barometric Pressure (972.5 hPa), Precipitation & Flash-Flood Threat (14.6 mm/hr), Impact Swath & Coastal Advisory Zones, and IMD Intensity Scale Reference.*

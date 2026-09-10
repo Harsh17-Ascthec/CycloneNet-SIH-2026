@@ -181,11 +181,14 @@ CycloneNet/
 
 ## 10. Screenshots / Prototype Photos
 
-High-resolution screenshots showing the interface, cyclone detection banner, wind swaths, and minimized card overlay are located in:
+### Home / Upload Interface
+![CycloneNet Home Screen](assets/screenshots/01-home.png.jpeg)
 
-`assets/screenshots/`
+### Cyclone Detection — Geospatial Map & Storm Position
+![CycloneNet Detection Map](assets/screenshots/02-result.png.jpeg)
 
-See [assets/screenshots/README.md](assets/screenshots/README.md) for screenshot descriptions and naming conventions.
+### Full Analysis Results Dashboard
+![CycloneNet Analysis Cards](assets/screenshots/03-feature.png.jpeg)
 
 ---
 
